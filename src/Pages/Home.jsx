@@ -1,17 +1,24 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Chips } from 'primereact/chips'
+import { Link } from "react-router-dom";
 
-import {Button} from 'primereact/button';
-
+        
 
 export function HomePage() {
-  const [count, setCount] = useState(0);
+    const [value, setValue] = useState();
 
-  return (
-    <>
-       <div className="text-center">
-            <Button label="Click" icon="pi pi-plus" onClick={e => setCount(count + 1)}></Button>
-            <div className="text-2xl text-900 mt-3">{count}</div>
-        </div>
-    </>
-  );
+    return (
+      <div>
+        
+        <>
+            <h1>registrace</h1>
+            <Link to={"/registrace"}>
+                <p>registrovat</p>
+            </Link>
+            <Link to={"/wizards"}>
+                <p>přihlásit se</p>
+            </Link>
+        </>
+      </div> 
+)
 }
