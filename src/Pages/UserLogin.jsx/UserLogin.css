@@ -1,0 +1,18 @@
+.prNadpis{
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 200px;
+}
+.prihlaseni{
+    margin: 2px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.prName, .prPassword{
+    margin: 2px;
+}
+.prBack{
+   margin-left: 1110px;
+}

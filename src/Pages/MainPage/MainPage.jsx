@@ -6,7 +6,7 @@ export default function MainPage() {
 
     return(
         <>
-            <h1>registrace</h1>
+            <h1>Registrace</h1>
             <Link to={"/creatuser"}>
                 <p>registrovat</p>
             </Link>

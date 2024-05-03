@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { HomePage } from "./Pages/Home";
 import { Layout } from "./Layout";
 import UserCreateForm from "./Pages/UserCreateForm/UserCreateForm";
-import LoginForm from "./Pages/LoginForm/LoginForm"
+import UserLogin from "./Pages/UserLogin.jsx/UserLogin";
 
 function App() {
   return (
@@ -10,8 +10,8 @@ function App() {
     <Layout>
       <Routes>
       <Route path="/" element={<HomePage />} />
-        <Route path="/prihlaseni" element={<UserCreateForm />} />
-        <Route path="/registrace" element={<LoginForm />} />
+      <Route path="/registrace" element={<UserCreateForm />} />
+      <Route path="/wizards" element={<UserLogin />} />
       </Routes>
     </Layout>
   </Router>
