@@ -5,6 +5,7 @@ import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Projects from "./Pages/Projects/Projects";
 import ProtectedRoute from "./Helpers/ProtectedRoute/ProtectedRoute";
+import CreatedProject from "./Pages/CreatedProject/CreatedProject";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Projects />
         </ProtectedRoute>
       } />
+      <Route path="/createdproject" element={<CreatedProject />} />
       </Routes>
     </Layout>
   </Router>

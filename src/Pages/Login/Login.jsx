@@ -47,19 +47,19 @@ export default function UserLogin() {
 
     return (
         <div className="container">
-            <h1 className="prNadpis">Přihlášení</h1><br />
+            <h1 className="loNadpis">Přihlášení</h1><br />
 
             {info && 
                 <Message severity="error" text={info} />
             }
             
             <form className="prihlaseni" onSubmit={handlePost}>
-                <div className="prName">
+                <div className="loName">
                     <InputText placeholder="Jméno" name="name" onChange={e => handleChange(e)}/>
                 </div>
                 <br />
                 
-                <div className="prPassword">
+                <div className="loPassword">
                     <Password  placeholder="Heslo" name="password"onChange={e => handleChange(e)} feedback={false} tabIndex={1} />
                 </div>
                 <br />
@@ -67,7 +67,7 @@ export default function UserLogin() {
                 <Button label="Přihlásit se" />
             </form>
 
-            <div className="prBack">
+            <div className="loBack">
                 <Link to= {"/"}>
                     <Button label="Go back" />
                 </Link>
