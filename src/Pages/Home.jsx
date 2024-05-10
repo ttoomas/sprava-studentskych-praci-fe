@@ -25,7 +25,7 @@ export function HomePage() {
             <div><Link to={"/projects"}>
             <Button label="tabulka" />
             </Link></div>
-        </> sk
+        </> 
       </div>
 )
 }
