@@ -7,10 +7,10 @@ export default function MainPage() {
     return(
         <>
             <h1>Registrace</h1>
-            <Link to={"/creatuser"}>
+            <Link to={"/register"}>
                 <p>registrovat</p>
             </Link>
-            <Link to={"/wizards"}>
+            <Link to={"/login"}>
                 <p>přihlásit se</p>
             </Link>
         </>

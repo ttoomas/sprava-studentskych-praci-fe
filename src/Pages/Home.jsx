@@ -15,13 +15,16 @@ export function HomePage() {
         <>
             <h1 className='nadpis'>Správa studenských prací</h1>
             <div className='tlacitka'>
-            <div className='registraceTlacitko'>< Link to={"/registrace"}>
+            <div className='registraceTlacitko'>< Link to={"/register"}>
             <Button label="Registrovat" />
             </Link></div>
-            <div className='prihlasitTlacitko'><Link to={"/wizards"}>
+            <div className='prihlasitTlacitko'><Link to={"/login"}>
             <Button label="Přihlásit se" />
             </Link></div>
             </div>
+            <div><Link to={"/projects"}>
+            <Button label="tabulka" />
+            </Link></div>
         </>
       </div>
 )

@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { HomePage } from "./Pages/Home";
 import { Layout } from "./Layout";
-import UserCreateForm from "./Pages/UserCreateForm/UserCreateForm";
-import UserLogin from "./Pages/UserLogin.jsx/UserLogin";
+import Register from "./Pages/Register/Register";
+import Login from "./Pages/Login/Login";
+import Projects from "./Pages/Projects/Projects";
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
     <Layout>
       <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/registrace" element={<UserCreateForm />} />
-      <Route path="/wizards" element={<UserLogin />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/projects" element={<Projects />} />
       </Routes>
     </Layout>
   </Router>
