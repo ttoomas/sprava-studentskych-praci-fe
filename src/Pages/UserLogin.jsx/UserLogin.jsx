@@ -3,7 +3,10 @@ import { useState, useEffect } from "react";
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
+import { Message } from 'primereact/message';
 import "./UserLogin.css";
+
+import { loginUser } from "../../models/User";
 
 
 
@@ -13,12 +16,11 @@ export default function UserLogin() {
     const navigate = useNavigate();
 
     const postForm = async () => {
-        console.log(formData);
-        const user = await Login(formData)
-        if (user.status === 201) {
-            redirectToSuccessPage(user.payload._id)
+        const user = await loginUser(formData);
+        if (user.status === 200) {
+            redirectTo();
         } else {
-            setInfo(user.msg)
+            setInfo("Wrong email/password");
         }
     }
 
@@ -31,23 +33,37 @@ export default function UserLogin() {
         postForm();
     }
 
-    const redirectToSuccessPage = (id) => {
-        return navigate(`/wizards/${id}`)
+    const redirectTo = () => {
+        return navigate(`/prace`)
     }
 
     return (
-        <>
-        <h1 className="prNadpis">Přihlášení</h1><br />
-        <form className="prihlaseni">
-        <div className="prName"><InputText placeholder="Jméno" name="name" onChange={e => handleChange(e)}/></div><br />
-        <div className="prPassword"><Password   placeholder="Heslo" name="password"onChange={e => handleChange(e)} feedback={false} tabIndex={1} /></div><br />
-       
-          
-           
-        <Button label="Přihlásit se" />
-        
-        </form>
-        <div className="prBack"><Link to= {"/"}><Button label="Go back" /></Link></div>
-        </>
+        <div className="container">
+            <h1 className="prNadpis">Přihlášení</h1><br />
+
+            {info && 
+                <Message severity="error" text={info} />
+            }
+            
+            <form className="prihlaseni" onSubmit={handlePost}>
+                <div className="prName">
+                    <InputText placeholder="Jméno" name="name" onChange={e => handleChange(e)}/>
+                </div>
+                <br />
+                
+                <div className="prPassword">
+                    <Password  placeholder="Heslo" name="password"onChange={e => handleChange(e)} feedback={false} tabIndex={1} />
+                </div>
+                <br />
+
+                <Button label="Přihlásit se" />
+            </form>
+
+            <div className="prBack">
+                <Link to= {"/"}>
+                    <Button label="Go back" />
+                </Link>
+            </div>
+        </div>
     )
 }

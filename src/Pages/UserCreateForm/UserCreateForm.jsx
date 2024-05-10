@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { createUser } from "../../models/User";
 import { InputText } from 'primereact/inputtext';
 import { SelectButton } from 'primereact/selectbutton';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import "./UserCreateForm.css";
+import { createUser } from "../../models/User";
 
 
 
@@ -15,12 +15,12 @@ export default function UserCreateForm() {
     const navigate = useNavigate();
 
     const postForm = async () => {
-        console.log(formData);
-        const user = await createUser(formData)
+        const user = await createUser(formData);
+
         if (user.status === 201) {
-            redirectToSuccessPage(user.payload._id)
+            redirectTo();
         } else {
-            setInfo(user.msg)
+            setInfo(user.msg);
         }
     }
 
@@ -33,26 +33,26 @@ export default function UserCreateForm() {
         postForm();
     }
 
-    const redirectToSuccessPage = (id) => {
-        return navigate(`/createduser/${id}`)
+    const redirectTo = () => {
+        return navigate(`/projekty`)
     }
 
     return (
         <>
         <h1 className="reNadpis">Registrace</h1><br />
-        <form className="registrace">
-        <div className="reName"><InputText placeholder="Jméno" name="name" onChange={e => handleChange(e)}/></div><br />
-        <div className="rePassword"><Password   placeholder="Heslo" name="password"onChange={e => handleChange(e)} feedback={false} tabIndex={1} /></div><br />
-        <div className="reClass"><InputText placeholder="Třída" name="class_name" onChange={e => handleChange(e)}/></div><br />
-        <div className="reRole"><SelectButton name="role" options={["Student", "Učitel"]} value={formData?.role||"Student"} onChange={e => handleChange(e)} /></div><br />
-        <div className="reTheme"><InputText placeholder="Téma" name="theme" onChange={e => handleChange(e)}/></div><br />
-        <div className="reTheme"><InputText placeholder="Obor" name="field" onChange={e => handleChange(e)}/></div><br />
-         
+
+        <form className="registrace" onSubmit={handlePost}>
+            <div className="reName"><InputText placeholder="Jméno" name="name" onChange={e => handleChange(e)}/></div><br />
+            <div className="rePassword"><Password   placeholder="Heslo" name="password"onChange={e => handleChange(e)} feedback={false} tabIndex={1} /></div><br />
+            <div className="reClass"><InputText placeholder="Třída" name="class_name" onChange={e => handleChange(e)}/></div><br />
+            <div className="reTheme"><InputText placeholder="Téma" name="theme" onChange={e => handleChange(e)}/></div><br />
+            <div className="reTheme"><InputText placeholder="Obor" name="field" onChange={e => handleChange(e)}/></div><br />
           
            
-        <Button label="Vytvořit uživatele" />
+            <Button label="Vytvořit uživatele" />
         
         </form>
+
         <div className="reBack"><Link to= {"/"}><Button label="Go back" /></Link></div>
         </>
     )
