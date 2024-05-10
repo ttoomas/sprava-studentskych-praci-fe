@@ -25,6 +25,9 @@ export function HomePage() {
             <div><Link to={"/projects"}>
             <Button label="tabulka" />
             </Link></div>
+            <div><Link to={"/createdproject"}>
+            <Button label="projekt" />
+            </Link></div>
         </> 
       </div>
 )

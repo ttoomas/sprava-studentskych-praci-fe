@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
 }
-.prNadpis{
+.loNadpis{
 display: flex;
 justify-content: center;
 align-items: center;
@@ -17,9 +17,9 @@ margin-top: 200px;
     justify-content: center;
     align-items: center;
 }
-.prName, .prPassword{
+.loName, .loPassword{
     margin: 2px;
 }
-.prBack{
+.loBack{
    margin-left: 1110px;
 }
