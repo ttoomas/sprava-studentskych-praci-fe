@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
@@ -7,6 +7,8 @@ import { Message } from 'primereact/message';
 import "./Login.css";
 
 import { loginUser } from "../../models/User";
+import { setIsFetching, userIsFetched } from "../../Helpers/redux/slice";
+import { useDispatch } from "react-redux";
 
 
 
@@ -14,10 +16,16 @@ export default function UserLogin() {
     const [formData, setFormData] = useState();
     const [info, setInfo] = useState();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const postForm = async () => {
+        dispatch(setIsFetching());
+        
         const user = await loginUser(formData);
+        
         if (user.status === 200) {
+            dispatch(userIsFetched());
+            
             redirectTo();
         } else {
             setInfo("Wrong email/password");
@@ -34,7 +42,7 @@ export default function UserLogin() {
     }
 
     const redirectTo = () => {
-        return navigate(`/prace`)
+        return navigate(`/projects`)
     }
 
     return (
