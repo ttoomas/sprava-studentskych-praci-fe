@@ -33,7 +33,7 @@ export default function UserCreateForm() {
     }
 
     const redirectTo = () => {
-        return navigate(`/projekty`)
+        return navigate(`/projects`);
     }
 
     return (
