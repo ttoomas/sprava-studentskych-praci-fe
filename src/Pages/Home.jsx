@@ -23,10 +23,13 @@ export function HomePage() {
             </Link></div>
             </div>
             <div><Link to={"/projects"}>
-            <Button label="tabulka" />
+            <Button label="projekty" />
             </Link></div>
             <div><Link to={"/createdproject"}>
-            <Button label="projekt" />
+            <Button label="vytvoreni projektu" />
+            </Link></div>
+            <div><Link to={"/projectteatcher"}>
+            <Button label="schvalení projektu" />
             </Link></div>
         </> 
       </div>
