@@ -6,6 +6,7 @@ import Login from "./Pages/Login/Login";
 import Projects from "./Pages/Projects/Projects";
 import ProtectedRoute from "./Helpers/ProtectedRoute/ProtectedRoute";
 import CreatedProject from "./Pages/CreatedProject/CreatedProject";
+import ProjectTeatcher from "./Pages/ProjectTeatcher/ProjectTeatcher";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         </ProtectedRoute>
       } />
       <Route path="/createdproject" element={<CreatedProject />} />
+      <Route path="/projectteatcher" element={<ProjectTeatcher />} />
       </Routes>
     </Layout>
   </Router>
