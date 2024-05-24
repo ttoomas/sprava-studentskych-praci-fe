@@ -7,7 +7,7 @@ import { Message } from 'primereact/message';
 import "./Login.css";
 
 import { loginUser } from "../../models/User";
-import { setIsFetching, updateUser, userIsFetched } from "../../Helpers/redux/slice";
+import { setIsFetching, userIsFetched } from "../../Helpers/redux/slice";
 import { useDispatch } from "react-redux";
 
 
@@ -25,12 +25,6 @@ export default function UserLogin() {
         
         if (user.status === 200) {
             dispatch(userIsFetched());
-            dispatch(updateUser({
-                user: {
-                    name: user.data.name,
-                    uniqueId: user.data.unique_id
-                }
-            }))
             
             redirectTo();
         } else {

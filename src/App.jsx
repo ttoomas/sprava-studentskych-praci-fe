@@ -7,6 +7,11 @@ import Projects from "./Pages/Projects/Projects";
 import ProtectedRoute from "./Helpers/ProtectedRoute/ProtectedRoute";
 import CreatedProject from "./Pages/CreatedProject/CreatedProject";
 import ProjectTeatcher from "./Pages/ProjectTeatcher/ProjectTeatcher";
+import User from "./Pages/Users/User";
+import UpdateProject from "./Pages/UpdateProject/UpdateProject";
+
+
+
 
 function App() {
   return (
@@ -24,6 +29,10 @@ function App() {
       } />
       <Route path="/createdproject" element={<CreatedProject />} />
       <Route path="/projectteatcher" element={<ProjectTeatcher />} />
+      <Route path="/users" element={<User/>}/>
+      <Route path="/updateproject" element={<UpdateProject/>}/>
+      
+    
       </Routes>
     </Layout>
   </Router>

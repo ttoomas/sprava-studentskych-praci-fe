@@ -31,6 +31,12 @@ export function HomePage() {
             <div><Link to={"/projectteatcher"}>
             <Button label="schvalení projektu" />
             </Link></div>
+            <div><Link to={"/users"}>
+            <Button label="user" />
+            </Link></div>
+            <div><Link to={"/updateproject"}>
+            <Button label="upraveni projektu" />
+            </Link></div>
         </> 
       </div>
 )
