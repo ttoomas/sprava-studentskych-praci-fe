@@ -9,12 +9,12 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { addProject, getProjects } from "../../models/Project";
 import { useSelector } from "react-redux";
+import React from "react";
 
 
 
 function ProjectsStudent({ projects, fetchProjects }) {
     const [infoVisible, setInfoVisible] = useState(false);
-
 
     async function handleAddProject(projectId){
         setInfoVisible(true);
@@ -28,12 +28,22 @@ function ProjectsStudent({ projects, fetchProjects }) {
     
     
     const addButton = (e) => {
-        if(e.user) return (
+        if(e.user && e.confirm_status) return (
             <Button
-                severity="warning"
+                severity="success"
                 type="button"
                 label="Přiřazeno"
                 icon="pi pi-check"
+                loading={false}
+            />
+        )
+
+        else if(e.user) return (
+            <Button
+                severity="warning"
+                type="button"
+                label="Potvrzení"
+                icon="pi pi-spinner"
                 loading={false}
             />
         )
@@ -48,8 +58,8 @@ function ProjectsStudent({ projects, fetchProjects }) {
         );
     };
 
-    const statusButton = (e) => {      
-        if(e.user) return (
+    const statusButton = (e) => {
+        if(e.user && e.confirm_status) return (
             <Button
                 severity="success"
                 type="button"
@@ -68,6 +78,18 @@ function ProjectsStudent({ projects, fetchProjects }) {
         );
     };
 
+    const dateTemplate = (rowData) => {
+        const date = new Date(rowData.created_at);
+        const formattedDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+        return (
+            <React.Fragment>
+                {formattedDate}
+            </React.Fragment>
+        );
+    };
+
+    console.log(projects);
+
 
     return (
         <>
@@ -78,11 +100,11 @@ function ProjectsStudent({ projects, fetchProjects }) {
                 <DataTable value={projects} tableStyle={{ minWidth: "60rem" }}>
                     <Column field="name" header="Name"></Column>
                     <Column field="theme" header="Theme"></Column>
-                    <Column field="student" header="Student"></Column>
+                    <Column field="user.name" header="Student"></Column>
                     <Column field="created_at" header="Datum vytvoření"></Column>
-                    <Column field="teacher" header="Vedoucí práce"></Column>
+                    <Column field="teacher.name" header="Vedoucí práce"></Column>
                     <Column field="description" header="Popis práce"></Column>
-                    <Column field="prirazeni" header="Datum přiřazení"></Column>
+                    <Column field="created_at" header="Datum Vytvoření" body={dateTemplate}></Column>
                     <Column field="field" header="Obor"></Column>
                     <Column header="Status" body={statusButton} />
                     <Column header="Vzít projekt" body={addButton} />
