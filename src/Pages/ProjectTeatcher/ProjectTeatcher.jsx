@@ -8,6 +8,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useSelector } from "react-redux";
 import { confirmProject, declineProject } from "../../models/Project";
+import React from "react";
 
 
 
@@ -45,6 +46,15 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
         fetchProjects();
     }
 
+    const dateTemplate = (rowData) => {
+        const date = new Date(rowData.created_at);
+        const formattedDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+        return (
+            <React.Fragment>
+                {formattedDate}
+            </React.Fragment>
+        );
+    };
 
     // Return
     return (
@@ -57,11 +67,10 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
                 <DataTable value={projects} tableStyle={{ minWidth: "60rem" }}>
                     <Column field="name" header="Name"></Column>
                     <Column field="theme" header="Theme"></Column>
-                    <Column field="student" header="Student"></Column>
-                    <Column field="created_at" header="Datum vytvoření"></Column>
+                    <Column field="user.name" header="Student"></Column>
+                    <Column field="created_at" header="Datum vytvoření" body={dateTemplate}></Column>
                     <Column field="teacher.name" header="Vedoucí práce"></Column>
                     <Column field="description" header="Popis práce"></Column>
-                    <Column field="prirazeni" header="Datum přiřazení"></Column>
                     <Column field="field" header="Obor"></Column>
                     <Column header="Status" body={declineProjectComponent} />
                     <Column header="Vzít projekt" body={acceptProjectComponent} />

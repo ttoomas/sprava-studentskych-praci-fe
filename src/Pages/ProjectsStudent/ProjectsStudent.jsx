@@ -88,7 +88,6 @@ function ProjectsStudent({ projects, fetchProjects }) {
         );
     };
 
-    console.log(projects);
 
 
     return (
@@ -101,10 +100,9 @@ function ProjectsStudent({ projects, fetchProjects }) {
                     <Column field="name" header="Name"></Column>
                     <Column field="theme" header="Theme"></Column>
                     <Column field="user.name" header="Student"></Column>
-                    <Column field="created_at" header="Datum vytvoření"></Column>
+                    <Column field="created_at" header="Datum Vytvoření" body={dateTemplate}></Column>
                     <Column field="teacher.name" header="Vedoucí práce"></Column>
                     <Column field="description" header="Popis práce"></Column>
-                    <Column field="created_at" header="Datum Vytvoření" body={dateTemplate}></Column>
                     <Column field="field" header="Obor"></Column>
                     <Column header="Status" body={statusButton} />
                     <Column header="Vzít projekt" body={addButton} />
