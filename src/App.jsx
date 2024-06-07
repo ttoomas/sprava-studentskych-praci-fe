@@ -9,6 +9,7 @@ import CreatedProject from "./Pages/CreatedProject/CreatedProject";
 import ProjectTeatcher from "./Pages/ProjectTeatcher/ProjectTeatcher";
 import User from "./Pages/Users/User";
 import UpdateProject from "./Pages/UpdateProject/UpdateProject";
+import Project from "./Pages/Project/Project";
 
 
 
@@ -31,6 +32,7 @@ function App() {
       <Route path="/projectteatcher" element={<ProjectTeatcher />} />
       <Route path="/users" element={<User/>}/>
       <Route path="/updateproject" element={<UpdateProject/>}/>
+      <Route path="/project" element={<Project/>}/>
       
     
       </Routes>

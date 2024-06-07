@@ -1,7 +1,7 @@
-.taNadpis{
+.projNadpis{
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 1.5em;
     
     }
     .table{
@@ -11,8 +11,10 @@
     align-items: center;
     }
     
-    .projectBack{
-        text-align: right;
-        margin-top: 0.5em;
-        
+
+    .projeBack{
+        margin: 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }

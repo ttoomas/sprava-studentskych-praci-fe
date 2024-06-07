@@ -9,13 +9,35 @@ import { Column } from 'primereact/column';
 
 
 
-export default function ProjectTeatcher({ projects, fetchProjects }) {
+export default function TableTheme() {
+    const products = [
+        {
+            name: "pepa",
+            theme: "it",
+            student: "honza",
+            vytvoreni: "21.5.2023",
+            vedouci: "jirka",
+            popis: "hdjhsyjsjs",
+            prirazeni: "25.4.1669",
+            obor: "IT",
+        },
+        {
+            name: "pepa",
+            theme: "it",
+            student: "honza",
+            vytvoreni: "21.5.2023",
+            vedouci: "jirka",
+            popis: "hdjhsyjsjs",
+            prirazeni: "25.4.1669",
+            obor: "IT",
+        }
+    ]
 
-    const dontAccept = () => {
+    const lockTemplate = () => {
         return <Button severity="danger"   type="button"  icon="pi pi-times" loading={false} />;
 
     };
-    const accept = () => {
+    const status = () => {
         return <Button severity="success"   type="button"  icon="pi pi-check" loading={false} />;
          
     };
@@ -24,24 +46,24 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
         <>
 
 
-            <h1 className="reNadpis">Schválení projektu</h1><br />
+<h1 className="reNadpis">Schválení projektu</h1><br />
 
-            <div>
-                <DataTable value={projects} tableStyle={{ minWidth: "60rem" }}>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="theme" header="Theme"></Column>
-                    <Column field="student" header="Student"></Column>
-                    <Column field="created_at" header="Datum vytvoření"></Column>
-                    <Column field="teacher" header="Vedoucí práce"></Column>
-                    <Column field="description" header="Popis práce"></Column>
-                    <Column field="prirazeni" header="Datum přiřazení"></Column>
-                    <Column field="field" header="Obor"></Column>
-                    <Column header="Status" body={dontAccept} />
-                    <Column header="Vzít projekt" body={accept} />
-                </DataTable>
-            </div>
+<div>
+        <DataTable value={products}  tableStyle={{ minWidth: '60rem' }}>
+    <Column field="name" header="Name"></Column>
+    <Column field="theme" header="Theme"></Column>
+    <Column field="student" header="Student"></Column>
+    <Column field="vytvoreni" header="Datum vytvoření"></Column>
+    <Column field="vedouci" header="Vedoucí práce" ></Column>
+    <Column field="popis" header="Popis práce" ></Column>
+    <Column field="prirazeni" header="Datum přiřazení"></Column>
+    <Column field="obor" header="Obor"></Column>
+    <Column header="Schválit" body={status}>dd</Column>
+    <Column header="Neschválit" body={lockTemplate} >dd</Column>
+</DataTable> 
+</div>
 
-        <div className="taBack"><Link to= {"/"}><Button label="Go back" /></Link></div>
+<div className="projectBack"><Link to= {"/"}><Button label="Go back" /></Link></div>
         </>
     )
 }

@@ -47,7 +47,7 @@ export default function TableTheme() {
 </DataTable> 
 </div>
 
-<div className="taBack"><Link to= {"/"}><Button label="Go back" /></Link></div>
+<div className="userBack"><Link to= {"/"}><Button label="Go back" /></Link></div>
         </>
     )
 }
