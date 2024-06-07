@@ -13,11 +13,15 @@ import { useSelector } from "react-redux";
 
 import ProjectsStudent from "../ProjectsStudent/ProjectsStudent";
 import ProjectTeatcher from "../ProjectTeatcher/ProjectTeatcher";
+import { logoutUser } from "../../models/User";
+import { useDispatch } from "react-redux";
+import { logoutStateUser } from "../../Helpers/redux/slice";
 
 
 export default function TableTheme() {
     const userState = useSelector((state) => state.user)
     const [projects, setProjects] = useState([]);
+    const dispatch = useDispatch();
 
     async function fetchProjects(){
         const result = await getProjects();
@@ -31,6 +35,13 @@ export default function TableTheme() {
     }, [])
 
 
+    async function handleLogout(){
+        await logoutUser();
+
+        dispatch(logoutStateUser());
+    };
+
+
 
     return <>
     {
@@ -40,9 +51,13 @@ export default function TableTheme() {
     }
 
     <div className="info">
-        <div className="user"><Link to= {"/createdproject"}><Button label="Vytvořit projekt" /></Link></div>
-        <div className="user"><Link to= {"/users"}><Button label="Uživatelé" /></Link></div>
-        <div className="user"><Link to= {"/"}><Button label="Odhlásit se" /></Link></div>
+        {
+            userState.user.isTeacher ? <>
+                <div className="user"><Link to= {"/users"}><Button label="Uživatelé" /></Link></div>
+                <div className="user"><Link to= {"/createdproject"}><Button label="Vytvořit projekt" /></Link></div>
+            </> : null
+        }
+        <div className="user"><Button label="Odhlásit se" onClick={handleLogout} /></div>
     </div>
     </>
 

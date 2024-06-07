@@ -34,3 +34,22 @@ export const createUser = async (formData) => {
     data: data.data
   };
 }
+
+
+export const logoutUser = async (formData) => {
+  const req = await fetch("http://localhost:5000/logout", {
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+    credentials: "include",
+    body: JSON.stringify(formData)
+  });
+  const data = await req.json();
+
+  return {
+    status: req.status,
+    data: data.data
+  };
+}

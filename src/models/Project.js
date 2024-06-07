@@ -14,6 +14,22 @@ export const getProjects = async (formData) => {
     };
 };
 
+export const getProjectById = async (id) => {
+    const req = await fetch(`http://localhost:5000/project/${id}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "GET",
+    });
+    const data = await req.json();
+
+    return {
+        status: req.status,
+        data: data.data,
+    };
+};
+
 export const addProject = async (formData) => {
     const req = await fetch("http://localhost:5000/project-assign", {
         headers: {

@@ -32,7 +32,7 @@ function App() {
       <Route path="/projectteatcher" element={<ProjectTeatcher />} />
       <Route path="/users" element={<User/>}/>
       <Route path="/updateproject" element={<UpdateProject/>}/>
-      <Route path="/project" element={<Project/>}/>
+      <Route path="/project/:id" element={<Project/>}/>
       
     
       </Routes>
