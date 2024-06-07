@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { ToggleButton } from "primereact/togglebutton";
 import { Dialog } from 'primereact/dialog';
 import "./TableTheme.css";
+import "./Projects.css"
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -31,9 +32,19 @@ export default function TableTheme() {
 
 
 
-    return userState.user.isTeacher
-        ? <ProjectTeatcher projects={projects} fetchProjects={fetchProjects} />
-        : <ProjectsStudent projects={projects} fetchProjects={fetchProjects} />
+    return <>
+    {
+        userState.user.isTeacher
+            ? <ProjectTeatcher projects={projects} fetchProjects={fetchProjects} />
+            : <ProjectsStudent projects={projects} fetchProjects={fetchProjects} />
+    }
+
+    <div className="info">
+        <div className="user"><Link to= {"/createdproject"}><Button label="Vytvořit projekt" /></Link></div>
+        <div className="user"><Link to= {"/users"}><Button label="Uživatelé" /></Link></div>
+        <div className="user"><Link to= {"/"}><Button label="Odhlásit se" /></Link></div>
+    </div>
+    </>
 
 
 }
