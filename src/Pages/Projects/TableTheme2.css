@@ -11,8 +11,9 @@
     align-items: center;
     }
     
-    .projectBack{
-        text-align: right;
-        margin-top: 0.5em;
+
+    .user{
+        margin: 2px;
+        float: left;
         
     }

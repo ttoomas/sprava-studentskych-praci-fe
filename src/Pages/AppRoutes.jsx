@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import MainPage from "./MainPage/MainPage";
 import Projects from "./Projects/Projects";
+import Project from "./Project/Project";
 
 import Register from "./Register/Register";
 import Login from "./Login.jsx/Login";
@@ -20,6 +21,7 @@ export default function AppRoutes() {
                 <Route path="/register" element={<Register />}/>                
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/projects" element={<Projects/>}/>
+                <Route path="/project" element={<Project/>}/>
                 <Route path="/projectteatcher" element={<ProjectTeatcher/>}/>
                 <Route path="/users" element={<User/>}/>
                 <Route path="/updateproject" element={<UpdateProject/>}/>

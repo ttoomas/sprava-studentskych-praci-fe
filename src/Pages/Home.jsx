@@ -37,6 +37,9 @@ export function HomePage() {
             <div><Link to={"/updateproject"}>
             <Button label="upraveni projektu" />
             </Link></div>
+            <div><Link to={"/project"}>
+            <Button label="projekt" />
+            </Link></div>
         </> 
       </div>
 )
