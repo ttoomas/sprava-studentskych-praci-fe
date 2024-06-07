@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "primereact/button";
 import { ToggleButton } from "primereact/togglebutton";
 import { Dialog } from 'primereact/dialog';
-import "./TableTheme.css";
+import "./TableTheme2.css";
 import "./Projects.css"
 
 import { DataTable } from "primereact/datatable";
