@@ -83,3 +83,21 @@ export const confirmProject = async (formData) => {
         data: data.data,
     };
 }
+
+export const createProject = async (formData) => {
+    const req = await fetch("http://localhost:5000/projects", {
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+          },
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify(formData)
+    });
+    const data = await req.json();
+
+    return {
+        status: req.status,
+        data: data.data,
+    };
+}

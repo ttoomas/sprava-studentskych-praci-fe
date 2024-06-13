@@ -1,18 +1,16 @@
-.taNadpis{
+.taNadpis {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    }
-    .table{
-        margin: 2px;
+}
+.table {
+    margin: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
-    }
-    
-    .projectBack{
-        text-align: right;
-        margin-top: 0.5em;
-        
-    }
+}
+
+.projectBack {
+    text-align: right;
+    margin-top: 0.5em;
+}
