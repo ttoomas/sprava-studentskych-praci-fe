@@ -12,26 +12,7 @@ import DateTemplate from "../../Helpers/DateFormat/DateTemplate";
 export default function ProjectTeatcher({ projects, fetchProjects }) {
     const userState = useSelector((state) => state.user);
 
-    // Dont accept
-    const declineProjectComponent = (e) => {
-        if (
-            !e.user ||
-            userState.user.uniqueId !== e.teacher.id ||
-            e.confirm_status
-        )
-            return;
-
-        return (
-            <Button
-                severity="danger"
-                type="button"
-                icon="pi pi-times"
-                loading={false}
-                onClick={() => handleDeclineProject(e.project_id)}
-            />
-        );
-    };
-
+    // Decline
     const handleDeclineProject = async (projectId) => {
         await declineProject({
             project_id: projectId,
@@ -41,25 +22,6 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
     };
 
     // Accept
-    const acceptProjectComponent = (e) => {
-        if (
-            !e.user ||
-            userState.user.uniqueId !== e.teacher.id ||
-            e.confirm_status
-        )
-            return;
-
-        return (
-            <Button
-                severity="success"
-                type="button"
-                icon="pi pi-check"
-                loading={false}
-                onClick={() => handleAcceptProject(e.project_id)}
-            />
-        );
-    };
-
     const handleAcceptProject = async (projectId) => {
         await confirmProject({
             project_id: projectId,
@@ -68,17 +30,68 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
         fetchProjects();
     };
 
-    const preview = (e) => {
+    // Component
+    const CombinedAceptDeclinedComponent = (e) => {
+        if (
+            !e.user ||
+            userState.user.uniqueId !== e.teacher.id ||
+            e.confirm_status
+        )
+            return;
+
         return (
-            <div className="preview">
-                <Link to={`/project/${e.project_id}`}>
-                    <Button label="Náhled" />
+            <>
+                <Button
+                    severity="success"
+                    type="button"
+                    icon="pi pi-check"
+                    loading={false}
+                    onClick={() => handleAcceptProject(e.project_id)}
+                />
+
+                <Button
+                    severity="danger"
+                    type="button"
+                    icon="pi pi-times"
+                    loading={false}
+                    onClick={() => handleDeclineProject(e.project_id)}
+                />
+            </>
+        )
+    }
+
+    // Other
+    const statusButton = (e) => {
+        if(e.user && e.confirm_status) return (
+            <Button
+                severity="success"
+                type="button"
+                label="Přiřazeno"
+                icon="pi pi-check"
+            />
+        )
+
+        return (
+            <Button
+                severity="info"
+                type="button"
+                label="Nepřiřazeno"
+                icon="pi pi-times"
+            />
+        );
+    };
+
+    const update = (e) => {
+        return (
+            <div className="update">
+                <Link to={`/project/update/${e.project_id}`}>
+                    <Button label="Upravit" />
                 </Link>
             </div>
         );
     };
 
-    // Return
+
     return (
         <>
             <h1 className="reNadpis">Schválení projektu</h1>
@@ -100,21 +113,13 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
                     ></Column>
                     <Column field="description" header="Popis práce"></Column>
                     <Column field="field" header="Obor"></Column>
-                    <Column header="Status" body={declineProjectComponent} />
+                    <Column header="Status" body={statusButton} />
                     <Column
-                        header="Vzít projekt"
-                        body={acceptProjectComponent}
+                        header="(Ne)Přijmout projekt"
+                        body={CombinedAceptDeclinedComponent}
                     />
-                    <Column header="" body={preview}>
-                        dd
-                    </Column>
+                    <Column header="Upravit" body={update}></Column>
                 </DataTable>
-            </div>
-
-            <div className="taBack">
-                <Link to={"/"}>
-                    <Button label="Go back" />
-                </Link>
             </div>
         </>
     );

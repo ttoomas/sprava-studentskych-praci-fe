@@ -11,34 +11,38 @@ import User from "./Pages/Users/User";
 import UpdateProject from "./Pages/UpdateProject/UpdateProject";
 import Project from "./Pages/Project/Project";
 
-
-
-
 function App() {
-  return (
-    <Router>
-    <Layout>
-      <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
+    return (
+        <Router>
+            <Layout>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
 
-      <Route path="/projects" element={
-        <ProtectedRoute>
-          <Projects />
-        </ProtectedRoute>
-      } />
-      <Route path="/createdproject" element={<CreatedProject />} />
-      <Route path="/projectteatcher" element={<ProjectTeatcher />} />
-      <Route path="/users" element={<User/>}/>
-      <Route path="/updateproject" element={<UpdateProject/>}/>
-      <Route path="/project/:id" element={<Project/>}/>
-      
-    
-      </Routes>
-    </Layout>
-  </Router>
-  );
+                    <Route
+                        path="/projects"
+                        element={
+                            <ProtectedRoute>
+                                <Projects />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/createdproject"
+                        element={<CreatedProject />}
+                    />
+                    <Route
+                        path="/projectteatcher"
+                        element={<ProjectTeatcher />}
+                    />
+                    <Route path="/users" element={<User />} />
+                    <Route path="/project/update/:id" element={<UpdateProject />} />
+                    <Route path="/project/:id" element={<Project />} />
+                </Routes>
+            </Layout>
+        </Router>
+    );
 }
 
 export default App;

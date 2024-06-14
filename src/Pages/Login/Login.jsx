@@ -65,19 +65,17 @@ export default function UserLogin() {
                 <div className="loName">
                     <InputText placeholder="Jméno" name="name" onChange={e => handleChange(e)}/>
                 </div>
-                <br />
                 
                 <div className="loPassword">
-                    <Password  placeholder="Heslo" name="password"onChange={e => handleChange(e)} feedback={false} tabIndex={1} />
+                    <Password  placeholder="Heslo" name="password"onChange={e => handleChange(e)} feedback={false} />
                 </div>
-                <br />
 
                 <Button label="Přihlásit se" />
             </form>
 
             <div className="loBack">
                 <Link to= {"/"}>
-                    <Button label="Go back" />
+                    <Button label="Zpět" />
                 </Link>
             </div>
         </div>

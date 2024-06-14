@@ -79,6 +79,16 @@ function ProjectsStudent({ projects, fetchProjects }) {
         );
     };
 
+    const preview = (e) => {
+        return (
+            <div className="preview">
+                <Link to={`/project/${e.project_id}`}>
+                    <Button label="Náhled" />
+                </Link>
+            </div>
+        );
+    };
+
 
 
     return (
@@ -97,6 +107,7 @@ function ProjectsStudent({ projects, fetchProjects }) {
                     <Column field="field" header="Obor"></Column>
                     <Column header="Status" body={statusButton} />
                     <Column header="Vzít projekt" body={addButton} />
+                    <Column header="Náhled" body={preview}></Column>
                 </DataTable>
             </div>
 

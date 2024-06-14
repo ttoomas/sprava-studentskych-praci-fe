@@ -52,7 +52,7 @@ export default function UserCreateForm() {
         
         </form>
 
-        <div className="reBack"><Link to= {"/"}><Button label="Go back" /></Link></div>
+        <div className="reBack"><Link to= {"/"}><Button label="Zpět" /></Link></div>
         </>
     )
 }

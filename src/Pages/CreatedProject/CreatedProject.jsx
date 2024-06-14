@@ -83,7 +83,7 @@ export default function UserCreateForm() {
 
             <div className="prBack">
                 <Link to={"/projects"}>
-                    <Button label="Go back" />
+                    <Button label="Zpět" />
                 </Link>
             </div>
         </>
