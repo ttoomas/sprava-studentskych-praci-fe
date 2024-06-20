@@ -1,0 +1,29 @@
+.project{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 42px 32px 42px;
+}
+.project__container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+}
+.projNadpis {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5em;
+}
+.table {
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projeBack {
+    margin-top: 22px;
+    align-self: flex-start;
+}
