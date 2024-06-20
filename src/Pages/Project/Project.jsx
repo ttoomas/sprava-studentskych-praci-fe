@@ -59,6 +59,7 @@ export default function TableTheme() {
 
 </div>
 
+<div className="projeBack"><Link to= {"/updateproject"}><Button label="Upravit projekt" /></Link></div>
 <div className="projeBack"><Link to= {"/projects"}><Button label="Všechny projekty" /></Link></div>
 
         </>
