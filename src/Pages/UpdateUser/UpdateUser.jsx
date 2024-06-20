@@ -1,9 +1,10 @@
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getUserById, updateUser } from "../../models/User";
 import { Checkbox } from "primereact/checkbox";
+import "./UpdateUser.css";
 
 function UpdateUser() {
     const [formData, setFormData] = useState();
@@ -48,9 +49,12 @@ function UpdateUser() {
 
     
     return (
-        <>
+        <div className="updateUser">
+            <h1 className="prNadpis">Úprava uživatele</h1>
+            <br />
+
             {formData ?
-                <form className="registrace" onSubmit={handlePost}>
+                <form className="updateUser__form" onSubmit={handlePost}>
                     <div className="reName">
                         <InputText
                             placeholder="Jméno"
@@ -94,10 +98,16 @@ function UpdateUser() {
                         <label htmlFor="isTeacher" className="ml-2">Is Teacher</label>
                     </div>
 
-                    <Button label="Potvrdit" />
+                    <div className="updateUser__btn">
+                        <Link to={"/users"}>
+                            <Button label="Zpět" type="button" />
+                        </Link>
+                        
+                        <Button label="Potvrdit" />
+                    </div>
                 </form>
             : <><h1>Načítání</h1></> }
-        </>
+        </div>
     );
 }
 

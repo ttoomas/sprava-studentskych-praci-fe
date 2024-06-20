@@ -1,16 +1,16 @@
-.updateProject{
+.createProject{
     width: 100%;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
 }
 .prNadpis {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -50px;
+    margin-top: 150px;
 }
 
 .prName,
@@ -36,24 +36,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 24px;
 }
-
-.buttonContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.createProject__btn{
     width: 100%;
-    row-gap: 8px;
-}
-.topButtonBx{
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row;
-    width: 100%;
-}
-.deleteButton{
-    width: 100%;
 }

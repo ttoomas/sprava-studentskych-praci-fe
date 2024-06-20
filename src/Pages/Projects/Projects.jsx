@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "primereact/button";
-import "./TableTheme.css";
 import "./Projects.css";
 
 import { getProjects } from "../../models/Project";
 import { useSelector } from "react-redux";
 
 import ProjectsStudent from "../ProjectsStudent/ProjectsStudent";
-import ProjectTeatcher from "../ProjectTeatcher/ProjectTeatcher";
+import ProjectTeacher from "../ProjectTeacher/ProjectTeacher";
 import { logoutUser } from "../../models/User";
 import { useDispatch } from "react-redux";
 import { logoutStateUser } from "../../Helpers/redux/slice";
@@ -37,38 +36,42 @@ export default function TableTheme() {
 
     return (
         <>
-            {userState.user.isTeacher ? (
-                <ProjectTeatcher
-                    projects={projects}
-                    fetchProjects={fetchProjects}
-                />
-            ) : (
-                <ProjectsStudent
-                    projects={projects}
-                    fetchProjects={fetchProjects}
-                />
-            )}
+            <div className="projects">
+                <div className="project__tableContainer">
+                    {userState.user.isTeacher ? (
+                        <ProjectTeacher
+                            projects={projects}
+                            fetchProjects={fetchProjects}
+                        />
+                    ) : (
+                        <ProjectsStudent
+                            projects={projects}
+                            fetchProjects={fetchProjects}
+                        />
+                    )}
+                </div>
 
-            <div className="info">
-                {userState.user.isAdmin ? (
-                    <div className="user">
-                        <Link to={"/users"}>
-                            <Button label="Uživatelé" />
-                        </Link>
-                    </div>
-                ) : null}
-                
-                {userState.user.isTeacher ? (
-                    <>
+                <div className="info">
+                    {userState.user.isAdmin ? (
                         <div className="user">
-                            <Link to={"/createdproject"}>
-                                <Button label="Vytvořit projekt" />
+                            <Link to={"/users"}>
+                                <Button label="Uživatelé" />
                             </Link>
                         </div>
-                    </>
-                ) : null}
-                <div className="user">
-                    <Button label="Odhlásit se" onClick={handleLogout} />
+                    ) : null}
+                    
+                    {userState.user.isTeacher ? (
+                        <>
+                            <div className="user">
+                                <Link to={"/projects/create"}>
+                                    <Button label="Vytvořit projekt" />
+                                </Link>
+                            </div>
+                        </>
+                    ) : null}
+                    <div className="user">
+                        <Button label="Odhlásit se" onClick={handleLogout} />
+                    </div>
                 </div>
             </div>
         </>

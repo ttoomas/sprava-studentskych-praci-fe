@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "primereact/button";
-import "./ProjectTeatcher.css";
+import "./ProjectTeacher.css";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -57,19 +57,20 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
                     onClick={() => handleDeclineProject(e.project_id)}
                 />
             </>
-        )
-    }
+        );
+    };
 
     // Other
     const statusButton = (e) => {
-        if(e.user && e.confirm_status) return (
-            <Button
-                severity="success"
-                type="button"
-                label="Přiřazeno"
-                icon="pi pi-check"
-            />
-        )
+        if (e.user && e.confirm_status)
+            return (
+                <Button
+                    severity="success"
+                    type="button"
+                    label="Přiřazeno"
+                    icon="pi pi-check"
+                />
+            );
 
         return (
             <Button
@@ -82,10 +83,7 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
     };
 
     const update = (e) => {
-        if (
-            userState.user.uniqueId !== e.teacher.id
-        )
-            return;
+        if (userState.user.uniqueId !== e.teacher.id) return;
 
         return (
             <div className="update">
@@ -96,13 +94,12 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
         );
     };
 
-
     return (
         <>
             <h1 className="reNadpis">Schválení projektu</h1>
             <br />
 
-            <div>
+            <div className="projectTableContainer">
                 <DataTable value={projects} tableStyle={{ minWidth: "60rem" }}>
                     <Column field="name" header="Name"></Column>
                     <Column field="theme" header="Theme"></Column>

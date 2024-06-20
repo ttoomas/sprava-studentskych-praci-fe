@@ -42,7 +42,7 @@ export default function TableTheme() {
     }, []);
 
     return (
-        <>
+        <div className="users">
             <h1 className="reNadpis">Uživatelé</h1>
             <br />
 
@@ -62,6 +62,6 @@ export default function TableTheme() {
                     <Button label="Zpět" />
                 </Link>
             </div>
-        </>
+        </div>
     );
 }

@@ -1,25 +1,27 @@
-.users{
+.home{
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
-    flex-direction: column;
-    padding-block: 32px;
-    padding-inline: 42px;
-}
-.taNadpis {
-    display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
 }
-.table {
+.nadpis {
+    font-size: 38px;
+    color: black;
     margin: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.userBack {
-    align-self: flex-start;
-    margin-top: auto;
+.tlacitka {
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+.registraceTlacitko,
+.prihlaseniTlacitko {
+    margin: 10px;
 }

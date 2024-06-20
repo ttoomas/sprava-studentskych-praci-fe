@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import "./CreatedProject.css";
+import "./CreateProject.css";
 import { Calendar } from "primereact/calendar";
 import { createProject } from "../../models/Project";
 
@@ -27,7 +27,7 @@ export default function UserCreateForm() {
     }
 
     return (
-        <>
+        <div className="createProject">
             <h1 className="prNadpis">Vytvoření projektu</h1>
             <br />
 
@@ -39,7 +39,6 @@ export default function UserCreateForm() {
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
-                <br />
                 <div className="prTheme">
                     <InputText
                         placeholder="Téma"
@@ -47,7 +46,6 @@ export default function UserCreateForm() {
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
-                <br />
                 <div className="prPopis">
                     <InputText
                         placeholder="Popis práce"
@@ -55,7 +53,6 @@ export default function UserCreateForm() {
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
-                <br />
                 <div className="prSkolniRok">
                     <Calendar
                         placeholder="Školní rok"
@@ -65,7 +62,6 @@ export default function UserCreateForm() {
                         dateFormat="yy"
                     />
                 </div>
-                <br />
                 <div className="prObor">
                     <InputText
                         placeholder="Obor"
@@ -77,15 +73,14 @@ export default function UserCreateForm() {
 
                 {info ? <h3>{info}</h3> : <></>}
                 
-                <br />
-                <Button label="Vytvořit" onClick={handleCreateProject} />
-            </div>
+                <div className="createProject__btn">
+                    <Link to={"/projects"}>
+                        <Button label="Zpět" type="button" />
+                    </Link>
 
-            <div className="prBack">
-                <Link to={"/projects"}>
-                    <Button label="Zpět" />
-                </Link>
+                    <Button label="Vytvořit" onClick={handleCreateProject} />
+                </div>
             </div>
-        </>
+        </div>
     );
 }

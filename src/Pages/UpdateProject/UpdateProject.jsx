@@ -1,13 +1,15 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import "./UpdateProject.css";
-import { createUser } from "../../models/User";
 import { Calendar } from "primereact/calendar";
-import { deleteProject, getProjectById, updateProject } from "../../models/Project";
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import {
+    deleteProject,
+    getProjectById,
+    updateProject,
+} from "../../models/Project";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 export default function UserCreateForm() {
     const [formData, setFormData] = useState();
@@ -54,27 +56,27 @@ export default function UserCreateForm() {
     }, []);
 
     // Delete popup
-    function handleDeletePopup(){
+    function handleDeletePopup() {
         confirmDialog({
-            message: 'Chcete smazat tento projekt?',
-            header: 'Smazání projektu',
-            icon: 'pi pi-info-circle',
-            defaultFocus: 'reject',
-            acceptClassName: 'p-button-danger',
+            message: "Chcete smazat tento projekt?",
+            header: "Smazání projektu",
+            icon: "pi pi-info-circle",
+            defaultFocus: "reject",
+            acceptClassName: "p-button-danger",
             acceptLabel: "Ano",
             rejectLabel: "Ne",
-            accept: acceptDelete
-        })
+            accept: acceptDelete,
+        });
     }
 
-    async function acceptDelete(){
+    async function acceptDelete() {
         await deleteProject(id);
 
-        navigate("/projects")
+        navigate("/projects");
     }
 
     return (
-        <>
+        <div className="updateProject">
             <h1 className="prNadpis">Úprava projektu</h1>
             <br />
 
@@ -88,7 +90,6 @@ export default function UserCreateForm() {
                             defaultValue={formData["name"]}
                         />
                     </div>
-                    <br />
                     <div className="prTheme">
                         <InputText
                             placeholder="Téma"
@@ -97,7 +98,6 @@ export default function UserCreateForm() {
                             defaultValue={formData["theme"]}
                         />
                     </div>
-                    <br />
                     <div className="prPopis">
                         <InputText
                             placeholder="Popis práce"
@@ -106,7 +106,6 @@ export default function UserCreateForm() {
                             defaultValue={formData["description"]}
                         />
                     </div>
-                    <br />
                     <div className="prSkolniRok">
                         <Calendar
                             placeholder="Školní rok"
@@ -117,7 +116,6 @@ export default function UserCreateForm() {
                             value={formData["year"]}
                         />
                     </div>
-                    <br />
                     <div className="prObor">
                         <InputText
                             placeholder="Obor"
@@ -126,26 +124,32 @@ export default function UserCreateForm() {
                             defaultValue={formData["field"]}
                         />
                     </div>
-                    <br />
 
                     {info ? <h3>{info}</h3> : <></>}
 
-                    <Button label="Potvrdit" />
+                    <div className="buttonContainer">
+                        <div className="topButtonBx">
+                            <Link to={"/projects"}>
+                                <Button label="Zpět" type="button" />
+                            </Link>
+
+                            <Button label="Potvrdit" />
+                        </div>
+
+                        <Button
+                            label="Smazat"
+                            severity="danger"
+                            onClick={handleDeletePopup}
+                            type="button"
+                            className="deleteButton"
+                        />
+                    </div>
                 </form>
             ) : (
                 <p>Načítání dat</p>
             )}
 
-            <div className="prBack">
-                <Link to={"/projects"}>
-                    <Button label="Zpět" />
-                </Link>
-            </div>
-            <div className="prBack">
-                <Button label="Smazat" severity="danger" onClick={handleDeletePopup}/>
-            </div>
-
             <ConfirmDialog />
-        </>
+        </div>
     );
 }

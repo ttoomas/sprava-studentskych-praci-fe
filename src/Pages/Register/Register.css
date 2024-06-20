@@ -1,14 +1,23 @@
+.register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
 .reNadpis {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 200px;
+    margin-top: -50px;
 }
-.registrace {
-    margin: 2px;
+.register__container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 12px;
 }
 .reName,
 .rePassword,
@@ -20,4 +29,13 @@
 }
 .reBack {
     margin-left: 1415px;
+}
+
+.register__btnContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    column-gap: 12px;
 }
