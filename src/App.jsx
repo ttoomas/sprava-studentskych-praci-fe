@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { HomePage } from "./Pages/Home";
-import { Layout } from "./Layout";
+import Layout from "./Layout";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Projects from "./Pages/Projects/Projects";
@@ -10,6 +10,7 @@ import ProjectTeatcher from "./Pages/ProjectTeatcher/ProjectTeatcher";
 import User from "./Pages/Users/User";
 import UpdateProject from "./Pages/UpdateProject/UpdateProject";
 import Project from "./Pages/Project/Project";
+import UpdateUser from "./Pages/UpdateUser/UpdateUser";
 
 function App() {
     return (
@@ -30,15 +31,52 @@ function App() {
                     />
                     <Route
                         path="/createdproject"
-                        element={<CreatedProject />}
+                        element={
+                            <ProtectedRoute>
+                                <CreatedProject />
+                            </ProtectedRoute>
+                        }
                     />
                     <Route
                         path="/projectteatcher"
-                        element={<ProjectTeatcher />}
+                        element={
+                            <ProtectedRoute>
+                                <ProjectTeatcher />
+                            </ProtectedRoute>
+                        }
                     />
-                    <Route path="/users" element={<User />} />
-                    <Route path="/project/update/:id" element={<UpdateProject />} />
-                    <Route path="/project/:id" element={<Project />} />
+                    <Route
+                        path="/users"
+                        element={
+                            <ProtectedRoute>
+                                <User />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/users/update/:id"
+                        element={
+                            <ProtectedRoute>
+                                <UpdateUser />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/project/update/:id"
+                        element={
+                            <ProtectedRoute>
+                                <UpdateProject />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/project/:id"
+                        element={
+                            <ProtectedRoute>
+                                <Project />
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
             </Layout>
         </Router>

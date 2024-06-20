@@ -1,53 +1,67 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Button } from 'primereact/button';
+import { Button } from "primereact/button";
 import "./User.css";
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { SelectButton } from 'primereact/selectbutton';
-
-
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { SelectButton } from "primereact/selectbutton";
+import { getAllUsers } from "../../models/User";
 
 export default function TableTheme() {
-    const products = [
-        {
-            name: "pepa",
-            email: "it@studemt.cz",
-            user: "honza",
-            
-        },
-        {
-            name: "pepa",
-            email: "it@student.cz",
-            user: "honza",
-        }
-    ]
+    const [users, setUsers] = useState([]);
 
-    const options = ['Učitel', 'Student'];
-    const user = () => {
+    const options = ["Učitel", "Student"];
+    const user = (e) => {
+        const buttonValue = e.is_teacher ? "Učitel" : "Student";
         
-        const [value, setValue] = useState(options[0]);
-        return <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
-        
-         
+        return (
+            <SelectButton
+                value={buttonValue}
+                options={options}
+            />
+        );
     };
+
+    const update = (e) => {
+        return (
+            <Link to={`/users/update/${e.unique_id}`}>
+                <Button>Upravit</Button>
+            </Link>
+        )
+    }
+
+    // Fetch users
+    async function fetchAllUsers() {
+        const usersData = await getAllUsers();
+
+        setUsers(usersData.data.users);
+    }
+
+    useEffect(() => {
+        fetchAllUsers();
+    }, []);
 
     return (
         <>
+            <h1 className="reNadpis">Uživatelé</h1>
+            <br />
 
+            <div>
+                <DataTable value={users} tableStyle={{ minWidth: "60rem" }}>
+                    <Column field="name" header="Jméno"></Column>
+                    <Column field="class_name" header="Třída"></Column>
+                    <Column field="theme" header="Téma"></Column>
+                    <Column field="field" header="Obor"></Column>
+                    <Column header="Uživatel" body={user}></Column>
+                    <Column header="Upravit" body={update}></Column>
+                </DataTable>
+            </div>
 
-<h1 className="reNadpis">Uživatelé</h1><br />
-
-<div>
-        <DataTable value={products}  tableStyle={{ minWidth: '60rem' }}>
-    <Column field="name" header="Name"></Column>
-    <Column field="email" header="Email"></Column>
-    <Column header="Uživatel" body={user}>dd</Column>
-
-</DataTable> 
-</div>
-
-<div className="userBack"><Link to= {"/"}><Button label="Zpět" /></Link></div>
+            <div className="userBack">
+                <Link to={"/projects"}>
+                    <Button label="Zpět" />
+                </Link>
+            </div>
         </>
-    )
+    );
 }

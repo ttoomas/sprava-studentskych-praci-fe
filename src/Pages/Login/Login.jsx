@@ -30,7 +30,8 @@ export default function UserLogin() {
                 user: {
                     name: user.data.name,
                     uniqueId: user.data.unique_id,
-                    isTeacher: user.data.isTeacher
+                    isTeacher: user.data.isTeacher,
+                    isAdmin: user.data.isAdmin
                 }
             }))
             

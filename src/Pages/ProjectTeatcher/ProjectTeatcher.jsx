@@ -82,6 +82,11 @@ export default function ProjectTeatcher({ projects, fetchProjects }) {
     };
 
     const update = (e) => {
+        if (
+            userState.user.uniqueId !== e.teacher.id
+        )
+            return;
+
         return (
             <div className="update">
                 <Link to={`/project/update/${e.project_id}`}>

@@ -1,18 +1,23 @@
-.reNadpis{
-display: flex;
-justify-content: center;
-align-items: center;
-margin-top: 200px;
+.reNadpis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
 }
-.registrace{
+.registrace {
     margin: 2px;
-display: flex;
-justify-content: center;
-align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.reName, .rePassword, .reClass, .reRole, .reTheme, .reTheme{
+.reName,
+.rePassword,
+.reClass,
+.reRole,
+.reTheme,
+.reTheme {
     margin: 2px;
 }
-.reBack{
+.reBack {
     margin-left: 1415px;
 }

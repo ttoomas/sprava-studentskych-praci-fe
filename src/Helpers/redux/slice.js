@@ -8,7 +8,8 @@ const initialState = {
     user: {
         name: "",
         uniqueId: "",
-        isTeacher: false
+        isTeacher: false,
+        isAdmin: false
     },
 };
 
@@ -27,7 +28,8 @@ const userSlice = createSlice({
           state.user = {
             name: action.payload.user.name,
             uniqueId: action.payload.user.uniqueId,
-            isTeacher: action.payload.user.isTeacher
+            isTeacher: action.payload.user.isTeacher,
+            isAdmin: action.payload.user.isAdmin
           }
         },
         logoutStateUser: (state) => {
@@ -35,6 +37,7 @@ const userSlice = createSlice({
             state.user.name = "";
             state.user.uniqueId = "";
             state.user.isTeacher = false;
+            state.user.isAdmin = false;
         }
     },
 });

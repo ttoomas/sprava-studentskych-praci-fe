@@ -6,7 +6,8 @@ import { Button } from "primereact/button";
 import "./UpdateProject.css";
 import { createUser } from "../../models/User";
 import { Calendar } from "primereact/calendar";
-import { getProjectById, updateProject } from "../../models/Project";
+import { deleteProject, getProjectById, updateProject } from "../../models/Project";
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 export default function UserCreateForm() {
     const [formData, setFormData] = useState();
@@ -16,13 +17,15 @@ export default function UserCreateForm() {
     const formDataKeys = ["name", "theme", "description", "year", "field"];
 
     const handleUpdateProject = async () => {
-        const allKeys = formDataKeys.every(key => key in formData && formData[key].toString().length > 0);
+        const allKeys = formDataKeys.every(
+            (key) => key in formData && formData[key].toString().length > 0
+        );
 
-        if(!allKeys) return setInfo("Vyplňte všechna pole");
+        if (!allKeys) return setInfo("Vyplňte všechna pole");
         else setInfo("");
 
         await updateProject(formData, id);
-        navigate('/projects');
+        navigate("/projects");
     };
 
     const handleChange = (e) => {
@@ -38,7 +41,10 @@ export default function UserCreateForm() {
     async function fetchProject() {
         const projectData = await getProjectById(id);
 
-        projectData.data.project["year"] = new Date(projectData.data.project["year"], 0);
+        projectData.data.project["year"] = new Date(
+            projectData.data.project["year"],
+            0
+        );
 
         setFormData(projectData.data.project);
     }
@@ -46,7 +52,26 @@ export default function UserCreateForm() {
     useEffect(() => {
         fetchProject();
     }, []);
-    
+
+    // Delete popup
+    function handleDeletePopup(){
+        confirmDialog({
+            message: 'Chcete smazat tento projekt?',
+            header: 'Smazání projektu',
+            icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
+            acceptClassName: 'p-button-danger',
+            acceptLabel: "Ano",
+            rejectLabel: "Ne",
+            accept: acceptDelete
+        })
+    }
+
+    async function acceptDelete(){
+        await deleteProject(id);
+
+        navigate("/projects")
+    }
 
     return (
         <>
@@ -103,7 +128,6 @@ export default function UserCreateForm() {
                     </div>
                     <br />
 
-                    
                     {info ? <h3>{info}</h3> : <></>}
 
                     <Button label="Potvrdit" />
@@ -118,8 +142,10 @@ export default function UserCreateForm() {
                 </Link>
             </div>
             <div className="prBack">
-                <Button label="Smazat" severity="danger" />
+                <Button label="Smazat" severity="danger" onClick={handleDeletePopup}/>
             </div>
+
+            <ConfirmDialog />
         </>
     );
 }
