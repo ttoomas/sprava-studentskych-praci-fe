@@ -1,59 +1,66 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
-import "./ProjectsStudent.css";
+import "./ProjectTeacher.css";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { addProject } from "../../models/Project";
+import { useSelector } from "react-redux";
+import { confirmProject, declineProject } from "../../models/Project";
+import React from "react";
 import DateTemplate from "../../Helpers/DateFormat/DateTemplate";
 
-function ProjectsStudent({ projects, fetchProjects }) {
-    const [infoVisible, setInfoVisible] = useState(false);
+export default function ProjectTeatcher({ projects, fetchProjects }) {
+    const userState = useSelector((state) => state.user);
 
-    async function handleAddProject(projectId) {
-        setInfoVisible(true);
-
-        await addProject({
+    // Decline
+    const handleDeclineProject = async (projectId) => {
+        await declineProject({
             project_id: projectId,
         });
 
         fetchProjects();
-    }
+    };
 
-    const addButton = (e) => {
-        if (e.user && e.confirm_status)
-            return (
+    // Accept
+    const handleAcceptProject = async (projectId) => {
+        await confirmProject({
+            project_id: projectId,
+        });
+
+        fetchProjects();
+    };
+
+    // Component
+    const CombinedAceptDeclinedComponent = (e) => {
+        if (
+            !e.user ||
+            userState.user.uniqueId !== e.teacher.id ||
+            e.confirm_status
+        )
+            return;
+
+        return (
+            <>
                 <Button
                     severity="success"
                     type="button"
-                    label="Přiřazeno"
                     icon="pi pi-check"
                     loading={false}
+                    onClick={() => handleAcceptProject(e.project_id)}
                 />
-            );
-        else if (e.user)
-            return (
-                <Button
-                    severity="warning"
-                    type="button"
-                    label="Potvrzení"
-                    icon="pi pi-spinner"
-                    loading={false}
-                />
-            );
 
-        return (
-            <Button
-                severity="success"
-                type="button"
-                label="Přířadit"
-                onClick={() => handleAddProject(e.project_id)}
-            />
+                <Button
+                    severity="danger"
+                    type="button"
+                    icon="pi pi-times"
+                    loading={false}
+                    onClick={() => handleDeclineProject(e.project_id)}
+                />
+            </>
         );
     };
 
+    // Other
     const statusButton = (e) => {
         if (e.user && e.confirm_status)
             return (
@@ -75,11 +82,13 @@ function ProjectsStudent({ projects, fetchProjects }) {
         );
     };
 
-    const preview = (e) => {
+    const update = (e) => {
+        if (userState.user.uniqueId !== e.teacher.id) return;
+
         return (
-            <div className="preview">
-                <Link to={`/project/${e.project_id}`}>
-                    <Button label="Náhled" />
+            <div className="update">
+                <Link to={`/project/update/${e.project_id}`}>
+                    <Button label="Upravit" />
                 </Link>
             </div>
         );
@@ -87,7 +96,7 @@ function ProjectsStudent({ projects, fetchProjects }) {
 
     return (
         <>
-            <h1 className="reNadpis">Výpis témat pro studenty</h1>
+            <h1 className="reNadpis">Schválení projektu</h1>
             <br />
 
             <div className="projectTableContainer">
@@ -97,7 +106,7 @@ function ProjectsStudent({ projects, fetchProjects }) {
                     <Column field="user.name" header="Student"></Column>
                     <Column
                         field="created_at"
-                        header="Datum Vytvoření"
+                        header="Datum vytvoření"
                         body={DateTemplate}
                     ></Column>
                     <Column
@@ -107,24 +116,13 @@ function ProjectsStudent({ projects, fetchProjects }) {
                     <Column field="description" header="Popis práce"></Column>
                     <Column field="field" header="Obor"></Column>
                     <Column header="Status" body={statusButton} />
-                    <Column header="Vzít projekt" body={addButton} />
-                    <Column header="Náhled" body={preview}></Column>
+                    <Column
+                        header="(Ne)Přijmout projekt"
+                        body={CombinedAceptDeclinedComponent}
+                    />
+                    <Column header="Upravit" body={update}></Column>
                 </DataTable>
             </div>
-
-            <Dialog
-                header="Zarezerováno"
-                visible={infoVisible}
-                style={{ width: "50vw" }}
-                onHide={() => setInfoVisible(false)}
-            >
-                <p className="m-0">
-                    Projekt byl zarezervován. Učitel nyní projekt
-                    přijme/nepřijme
-                </p>
-            </Dialog>
         </>
     );
 }
-
-export default ProjectsStudent;

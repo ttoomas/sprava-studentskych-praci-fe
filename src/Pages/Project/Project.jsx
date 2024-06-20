@@ -1,52 +1,61 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from 'primereact/button';
 import { ToggleButton } from 'primereact/togglebutton';
 import "./TableTheme.css";
 import { Fieldset } from 'primereact/fieldset';
+import { getProjectById } from "../../models/Project";
+import { formatDate } from "../../Helpers/DateFormat/DateFormat";
 
 
 export default function TableTheme() {
-    const products = [
-        {
-            name: "pepa",
-            theme: "it",
-            student: "honza",
-            vytvoreni: "21.5.2023",
-            vedouci: "jirka",
-            popis: "hdjhsyjsjs",
-            prirazeni: "25.4.1669",
-            obor: "IT",
-        },
-        {
-            name: "pepa",
-            theme: "it",
-            student: "honza",
-            vytvoreni: "21.5.2023",
-            vedouci: "jirka",
-            popis: "hdjhsyjsjs",
-            prirazeni: "25.4.1669",
-            obor: "IT",
-        }
-    ]
+    const { id } = useParams();
+    const [project, setProject] = useState();
     
+    async function getProject(){
+        const projectData = await getProjectById(id);
 
+        setProject(projectData.data.project);
+    }
+
+    useEffect(() => {
+        getProject();
+    }, [])
+    
+    
+    
     return (
         <>
 
 
 <h1 className="projNadpis">Podrobnosti projektu</h1><br />
 
-<div value={products}>
-        <Fieldset  legend="Name"></Fieldset><br />
-        <Fieldset legend="Theme"></Fieldset><br />
-        <Fieldset legend="Student"></Fieldset><br />
-        <Fieldset legend="Datum vytvoření"></Fieldset><br />
-        <Fieldset legend="Vedoucí práce"></Fieldset><br />
-        <Fieldset legend="Popis práce"></Fieldset><br />
-        <Fieldset legend="Datum přiřazení"></Fieldset><br />
-        <Fieldset legend="Obor"></Fieldset><br /> 
-        <Fieldset legend="Status"><ToggleButton type="button" className="p-button-sm p-button-text" onLabel="Přiřazeno" offLabel="Nepřiřazeno" onIcon="pi pi-check" offIcon="pi pi-times" /></Fieldset><br />   
+<div>
+        <Fieldset  legend="Name">{ project && project.name }</Fieldset><br />
+        <Fieldset legend="Theme">{ project && project.theme }</Fieldset><br />
+        <Fieldset legend="Student">{ project && project.user.name }</Fieldset><br />
+        <Fieldset legend="Datum vytvoření">{ project ? formatDate(project.created_at) : "" }</Fieldset><br />
+        <Fieldset legend="Vedoucí práce">{ project && project.teacher.name }</Fieldset><br />
+        <Fieldset legend="Popis práce">{ project && project.description }</Fieldset><br />
+        <Fieldset legend="Obor">{ project && project.field }</Fieldset><br /> 
+        <Fieldset legend="Status">
+            {
+                project && project.confirm_status
+                ? <Button
+                    severity="success"
+                    type="button"
+                    label="Přiřazeno"
+                /> : (project && !project.confirm_status && project.user ? <Button
+                    severity="warning"
+                    type="button"
+                    label="Čeká na potvrzení"
+                /> : <Button
+                    severity="warning"
+                    type="button"
+                    label="Nepřiřazeno"
+                />)
+            }
+        </Fieldset><br />   
 
 </div>
 

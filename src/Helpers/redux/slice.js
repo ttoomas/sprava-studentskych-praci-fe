@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    state: {
-        isFetching: false,
+    status: {
+        isAuthenticated: false,
+        isFetching: false
     },
     user: {
         name: "",
         uniqueId: "",
-        isTeacher: false
+        isTeacher: false,
+        isAdmin: false
     },
 };
 
@@ -16,20 +18,29 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setIsFetching: (state) => {
-            state.state.isFetching = true;
+            state.status.isFetching = true;
         },
         userIsFetched: (state) => {
-            state.isAuthenticated = true;
+            state.status.isFetching = false;
+            state.status.isAuthenticated = true;
         },
         updateUser: (state, action) => {
           state.user = {
             name: action.payload.user.name,
             uniqueId: action.payload.user.uniqueId,
-            isTeacher: action.payload.user.isTeacher
+            isTeacher: action.payload.user.isTeacher,
+            isAdmin: action.payload.user.isAdmin
           }
+        },
+        logoutStateUser: (state) => {
+            state.status.isAuthenticated = false;
+            state.user.name = "";
+            state.user.uniqueId = "";
+            state.user.isTeacher = false;
+            state.user.isAdmin = false;
         }
     },
 });
 
-export const { setIsFetching, userIsFetched, updateUser } = userSlice.actions;
+export const { setIsFetching, userIsFetched, updateUser, logoutStateUser } = userSlice.actions;
 export default userSlice.reducer;

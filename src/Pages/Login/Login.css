@@ -1,28 +1,30 @@
-.container{
+.login__container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100vh;
 }
-.loNadpis{
-display: flex;
-justify-content: center;
-align-items: center;
-margin-top: 200px;
+.loNadpis {
+    margin: 0;
+    margin-top: -50px;
 }
-.prihlaseni{
-    margin: 2px;
+.prihlaseni {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    row-gap: 12px;
 }
-.loName, .loPassword{
+.loName,
+.loPassword {
     margin: 2px;
 }
-.loBack{
+.login__btnContainer{
+    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 2px;
+    justify-content: space-between;
+    flex-direction: row;
 }
